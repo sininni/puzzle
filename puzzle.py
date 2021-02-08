@@ -1,14 +1,3 @@
-board = [
- "**** ****",
- "***1 ****",
- "**  3****",
- "* 4 1****",
- "     9 5 ",
- " 6  83  *",
- "3   1  **",
- "  8  2***",
- "  2  ****"
-]
 from typing import List
 
 def horisontal_check(board: List[str]) -> bool:
@@ -27,14 +16,11 @@ def horisontal_check(board: List[str]) -> bool:
     True
     """
     for row in board:
-        # row = row.strip('*').split(' ')
         row = [sign for sign in row
                if sign != '*' and sign != ' ']
         if len(row) != len(set(row)):
             return False
-        # print(row)
     return True
-# print(horisontal_check(board))
 
 def vertical_check(board: List[str]) -> bool:
     """
@@ -58,8 +44,6 @@ def vertical_check(board: List[str]) -> bool:
             new_row += row[index]
         horizontal_board.append(new_row)
     return horisontal_check(horizontal_board)
-
-# print(vertical_check(board))
 
 def similar_color_area_check(board: List[str]) -> bool:
     """
@@ -88,9 +72,6 @@ def similar_color_area_check(board: List[str]) -> bool:
                     for index in range(start_index+1, start_index+5):
                         if board[row_index+4][index] != ' ':
                             number_list.append(board[row_index+4][index])
-                    # number_list = [board[row_index+4][index]
-                    # if board[row_index+4][index] != ' '
-                    # for index in range(start_index+1, start_index+4)]
             if len(number_list) != len(set(number_list)):
                 return False
             else:
@@ -122,8 +103,6 @@ def validate_board(board: List[str]) -> bool:
         and similar_color_area_check(board):
         return True 
     return False
-
-print(validate_board(board))
 
 if __name__=='__main__':
     from doctest import testmod
