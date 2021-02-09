@@ -1,3 +1,7 @@
+"""
+This module checks if game board with size
+9x9 is suitable for the every rule of the game.
+"""
 from typing import List
 
 def horisontal_check(board: List[str]) -> bool:
@@ -68,17 +72,15 @@ def similar_color_area_check(board: List[str]) -> bool:
             for key in range(row_index, row_index+5):
                 if board[key][start_index] != ' ':
                     number_list.append(board[key][start_index])
-                elif key == row_index+4:
-                    for index in range(start_index+1, start_index+5):
-                        if board[row_index+4][index] != ' ':
-                            number_list.append(board[row_index+4][index])
+            for index in range(start_index+1, start_index+5):
+                if board[row_index+4][index] != ' ':
+                    number_list.append(board[row_index+4][index])
             if len(number_list) != len(set(number_list)):
                 return False
             else:
                 start_index -= 1
                 row_index +=1
     return True
-
 def validate_board(board: List[str]) -> bool:
     """
     Indicates if board (9x9) is ready for game by checking
@@ -101,9 +103,5 @@ def validate_board(board: List[str]) -> bool:
     """
     while horisontal_check(board) and vertical_check(board)\
         and similar_color_area_check(board):
-        return True 
+        return True
     return False
-
-if __name__=='__main__':
-    from doctest import testmod
-    testmod()
